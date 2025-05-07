@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { MovieDto } from "./dto/movie.dto";
 import { PrismaService } from "../prisma/prisma.service";
-import { Movie } from "@prisma/client";
 
 @Injectable()
 export class MovieService {
@@ -24,7 +23,7 @@ export class MovieService {
     });
   }
 
-  async findById(id: string): Promise<Movie> {
+  async findById(id: string) {
     const movie = await this.prismaService.movie.findUnique({
       where: { id },
       include: {
