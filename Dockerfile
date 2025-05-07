@@ -5,7 +5,7 @@ FROM oven/bun:1.1.4
 WORKDIR /app
 
 # 3. Копируем зависимости и устанавливаем
-COPY bun.lockb package.json tsconfig*.json ./
+COPY bun.lock package.json tsconfig*.json ./
 RUN bun install
 
 # 4. Копируем весь исходный код
