@@ -10,7 +10,14 @@ import {
 } from "@nestjs/common";
 import { MovieService } from "./movie.service";
 import { MovieDto } from "./dto/movie.dto";
-import { ApiOperation, ApiParam, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+  ApiBody,
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from "@nestjs/swagger";
 
 @ApiTags("Movie")
 @Controller("movies")
@@ -34,6 +41,7 @@ export class MovieController {
     summary: "Получить фильм по ID",
     description: "Возвращает информацию о фильме",
   })
+  @ApiQuery({ name: "year", type: "number", description: "Фильтр по году" })
   @ApiResponse({
     status: HttpStatus.OK,
     description: "Фильм найден",
@@ -45,6 +53,15 @@ export class MovieController {
     return this.movieService.findById(id);
   }
 
+  @ApiOperation({ summary: "Создать фильм" })
+  @ApiBody({
+    schema: {
+      type: "object",
+      properties: {
+        title: { type: "string", example: "Movie Title" },
+      },
+    },
+  })
   @Post()
   create(@Body() dto: MovieDto) {
     return this.movieService.create(dto);
