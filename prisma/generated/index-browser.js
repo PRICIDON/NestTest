@@ -120,37 +120,10 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
-exports.Prisma.MovieScalarFieldEnum = {
+exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  description: 'description',
-  releaseYear: 'releaseYear',
-  rating: 'rating',
-  isAvailable: 'isAvailable',
-  genre: 'genre',
-  posterId: 'posterId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.MoviePosterScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ReviewScalarFieldEnum = {
-  id: 'id',
-  text: 'text',
-  rating: 'rating',
-  movieId: 'movieId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ActorScalarFieldEnum = {
-  id: 'id',
+  email: 'email',
+  password: 'password',
   name: 'name',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -166,22 +139,9 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
-exports.Prisma.NullsOrder = {
-  first: 'first',
-  last: 'last'
-};
-exports.Genre = exports.$Enums.Genre = {
-  ACTION: 'ACTION',
-  COMEDY: 'COMEDY',
-  DRAMA: 'DRAMA',
-  HORROR: 'HORROR'
-};
 
 exports.Prisma.ModelName = {
-  Movie: 'Movie',
-  MoviePoster: 'MoviePoster',
-  Review: 'Review',
-  Actor: 'Actor'
+  User: 'User'
 };
 
 /**
