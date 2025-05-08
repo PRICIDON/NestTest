@@ -11,7 +11,7 @@ RUN apt-get update && \
 
 # 4. Копируем зависимости и устанавливаем
 COPY bun.lock package.json tsconfig*.json ./
-RUN bun install
+RUN bun install --verbose
 
 # 5. Копируем весь исходный код
 COPY . .
