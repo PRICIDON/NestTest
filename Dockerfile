@@ -1,5 +1,5 @@
 # 1. Используем официальный образ Bun
-FROM oven/bun:1.1.4
+FROM oven/bun:latest
 
 # 2. Устанавливаем рабочую директорию
 WORKDIR /app
