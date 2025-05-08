@@ -5,24 +5,17 @@ import {
   MaxLength,
   MinLength,
 } from "class-validator";
-import { ApiProperty } from "@nestjs/swagger";
+import { Field, InputType } from "@nestjs/graphql";
 
-export class LoginRequest {
-  @ApiProperty({
-    description: "Почтовый адрес",
-    example: "john.doe@example.com",
-  })
+@InputType()
+export class LoginInput {
+  @Field(() => String)
   @IsString({ message: "Почта должна быть строкой" })
   @IsNotEmpty({ message: "Почта обязательна для заполнения" })
   @IsEmail({}, { message: "Некорректный формат" })
   email: string;
 
-  @ApiProperty({
-    description: "Пароль",
-    example: "123456789",
-    minLength: 6,
-    maxLength: 128,
-  })
+  @Field(() => String)
   @IsString({ message: "Пароль должен быть строкой" })
   @IsNotEmpty({ message: "Пароль обязателен для заполнения" })
   @MinLength(6, { message: "Пароль должен содержать не менее 6 символов" })

@@ -5,14 +5,14 @@ import {
   UnauthorizedException,
 } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
-import { RegisterRequest } from "./dto/register.dto";
 import { hash, verify } from "argon2";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { JwtPayload } from "./interfaces/jwt.interface";
-import { LoginRequest } from "./dto/login.dto";
 import { Response, Request } from "express";
 import { isDev } from "../utils/is-dev.util";
+import { RegisterInput } from "./inputs/register.input";
+import { LoginInput } from "./inputs/login.input";
 
 @Injectable()
 export class AuthService {
@@ -34,8 +34,8 @@ export class AuthService {
       "JWT_REFRESH_TOKEN_TTL",
     );
   }
-  async register(res: Response, dto: RegisterRequest) {
-    const { name, email, password } = dto;
+  async register(res: Response, input: RegisterInput) {
+    const { name, email, password } = input;
 
     const existUser = await this.prismaService.user.findUnique({
       where: { email },
@@ -55,8 +55,8 @@ export class AuthService {
     return this.auth(res, user.id);
   }
 
-  async login(res: Response, dto: LoginRequest) {
-    const { email, password } = dto;
+  async login(res: Response, input: LoginInput) {
+    const { email, password } = input;
     const user = await this.prismaService.user.findUnique({
       where: { email },
       select: {
@@ -139,7 +139,7 @@ export class AuthService {
       domain: this.COOKIE_DOMAIN,
       expires,
       secure: !isDev(this.configService),
-      sameSite: isDev(this.configService) ? "none" : "lax",
+      sameSite: "lax",
     });
   }
 }
