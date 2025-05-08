@@ -10,11 +10,8 @@ RUN apt-get update && \
     ln -s /usr/bin/python3 /usr/bin/python
 
 # 4. Копируем зависимости и устанавливаем
-COPY bun.lock package.json tsconfig*.json ./
-RUN bun install --verbose
-
-# 5. Копируем весь исходный код
 COPY . .
+RUN bun install --verbose
 
 # 6. Сборка проекта NestJS
 RUN bun run build
