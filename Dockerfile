@@ -4,18 +4,23 @@ FROM oven/bun:1.1.4
 # 2. Устанавливаем рабочую директорию
 WORKDIR /app
 
-# 3. Копируем зависимости и устанавливаем
+# 3. Устанавливаем необходимые зависимости для node-gyp (Python, make, g++, etc.)
+RUN apt-get update && \
+    apt-get install -y python3 make g++ && \
+    ln -s /usr/bin/python3 /usr/bin/python
+
+# 4. Копируем зависимости и устанавливаем
 COPY bun.lock package.json tsconfig*.json ./
 RUN bun install
 
-# 4. Копируем весь исходный код
+# 5. Копируем весь исходный код
 COPY . .
 
-# 5. Сборка проекта NestJS
+# 6. Сборка проекта NestJS
 RUN bun run build
 
-# 6. Открываем нужный порт
+# 7. Открываем нужный порт
 EXPOSE 3000
 
-# 7. Запуск прод-сервера
+# 8. Запуск прод-сервера
 CMD ["bun", "run", "start:prod"]
